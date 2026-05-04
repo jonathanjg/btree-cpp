@@ -132,14 +132,54 @@ Traversal: 5 6 10 12 20
 6 found
 ```
 
+Perfect! Here’s an **updated section for your README** that explains how to create the Graphviz SVG from your B-tree and open it on RHEL 10 using `xdg-open`. You can just paste this into your README.md under a **Visualizing the Tree** section.
+
 ---
 
-## Key Takeaways
+## Visualizing the B-tree with Graphviz
 
-* B-trees are **balanced search trees** optimized for large datasets.
-* Nodes can contain multiple keys → fewer disk accesses in databases.
-* Insertion may cause **node splitting**, keeping the tree balanced.
-* Traversal gives keys in sorted order.
+This project can export the B-tree structure to a **Graphviz `.dot` file** and then convert it into an image (SVG or PNG) for easy visualization.
+
+### Steps:
+
+1. **Run the program to generate the `.dot` file**
+
+```bash
+./btree_cpp
+````
+
+* This will create a file called `btree.dot` in the working directory.
+
+2. **Convert the `.dot` file to an SVG image**
+
+```bash
+dot -Tsvg btree.dot -o btree.svg
+```
+
+* `-Tsvg` tells Graphviz to generate an SVG file.
+* You can also use `-Tpng` to create a PNG image:
+
+```bash
+dot -Tpng btree.dot -o btree.png
+```
+
+3. **Open the SVG file on RHEL 10**
+
+```bash
+xdg-open btree.svg
+```
+
+* This will open the file with the default image viewer for SVG files.
+* Replace `btree.svg` with `btree.png` if you generated a PNG instead.
+
+---
+
+### Notes
+
+* For large B-trees (thousands of nodes), **SVG is recommended** because it scales better.
+* You can limit the depth of the tree in your `exportToDot` method to avoid overly large diagrams.
+* This provides a clear, visual way to verify **node splitting** and tree structure.
+
 
 ---
 
